@@ -1,5 +1,36 @@
 #include <stdio.h>
 
+//estrutura de movimentação da torre com recurso
+void torre(int mtorre) {
+    if(mtorre <= 5 && mtorre > 0){
+        printf("Direita!\n");
+        mtorre++;
+        torre(mtorre);
+        }
+}
+
+//estrutura de movimentação do bispo com recurso
+void bispo(int mbispo, char mbispo2) {
+    if(mbispo2 >= 'A' && mbispo2 <= 'E') {
+        mbispo2++;
+        printf("Cima!\n");    
+    if (mbispo <= 5 && mbispo > 0) {
+        mbispo++;    
+        printf("Direita!\n"); 
+    } 
+        bispo(mbispo, mbispo2); 
+        }   
+}      
+
+//estrutura de movimentação da rainha com recurso
+void rainha (mrainha) {
+    if(mrainha > 0 && mrainha <=8){
+        mrainha--;
+        printf("Esqueda!\n");
+        rainha(mrainha);
+    }
+}
+
 /* 
 O jogo está em fase inicial e por enquanto deve fazer a movimentação das tres peças abaixo:
 
@@ -10,7 +41,10 @@ rainha: movendo 08 casas a esquerda
 
 int main () {
 
-    int movtorre = 0, movbispo1 = 0, movbispo2 = 0, movrainha = 8;
+
+    //declaracao de variaveis
+    int movtorre = 1, movbispo1 = 1, movbispo2 = 'A', movrainha = 8, movcavalo1 = 1;
+    char  movcavalo2 = 'A';
 
 
 printf("Bem vindo ao teste de xadrez!\n"); // tela de bem vindo
@@ -19,48 +53,38 @@ printf("pois ainda estamos em fase de teste!\n\n");
 
 //movimentação das peças
 
+
+//estrutura de movimento definida na função void torre
 printf("MOVIMENTAÇÃO DA TORRE:\n");
+torre(movtorre);
+printf("\n");
 
- while (movtorre <= 5) {  // while deve conter uma condição que caso seja falsa interrompe a repetição do codigo
-        if (movtorre > 0) { 
-            printf("Direita!\n");
+
+
+//estrutura de movimento definida na função void bispo
+printf("MOVIMENTAÇÃO DO BISPO:\n");
+bispo(movbispo1, movbispo2);
+printf("\n");
+
+    
+//estrutura de movimento definida na função void rainha
+printf("MOVIMENTAÇÃO DA RAINHA!\n");
+rainha(movrainha);   
+printf("\n");
+
+//estrutura de loop aninhada para movimentação do cavalo
+
+printf("MOVIMENTAÇÃO DO CAVALO!\n");
+
+    for (movcavalo2; movcavalo2 < 'B' ; ++movcavalo2) { //loop externo
+        
+        for (movcavalo1; movcavalo1 > 0 && movcavalo1 < 3; movcavalo1++) { //loop interno
+            printf("Cima!\n"); //impressão do loop interno      
         }
-        movtorre++; // variavel para evitar loop infinito no codigo
+        printf("Direita!\n"); //impressão do loop externo
     }
-    printf("\n"); // linha de separação
-
-    //a partir daqui esta o comando de movimentação do bispo
-
-    printf("MOVIMENTAÇÃO DO BISPO:\n");
-
-    do {   //executa o codigo ao menos um vez, mesmo que a condição seja falsa  
-
-    if (movbispo1 > 0 && movbispo2 > 0)   
-
-    printf("Direita, cima!\n");
-
-    movbispo1++;
-    movbispo2++;
-
-    } while (movbispo1 <= 5 && movbispo2 <= 5); //condição para execução do codigo
-
-    printf("\n"); // linha de separação
-
-    printf("MOVIMENTAÇÃO DA RAINHA!\n");
-
-    /*for (variavel, condição, incremento), a variavel pode ser criada dentro do FOR
-    mas só pode ser usada nessa parte do codigo se for criada aqui, para usar a variavel em 
-    outros lugares do codigo a variavel deve ser criada fora do FOR*/
-
-    for (movrainha; movrainha > 0; movrainha--) { // usar ; como separador. EXEMPLO for (a; b == 0; c++)
-
-        if (movrainha <= 8)
-        printf("Esquerda!\n");     
-
-    } 
 
     return 0;
 
 }
-
 
